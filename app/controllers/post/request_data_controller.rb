@@ -7,20 +7,17 @@ class Post::RequestDataController < ApplicationController
     end
     p params.permit!
     @location = Information.new(params[:request_datum], :local_time => Time.now)
-    respond_to do |format|
-      if @location.save
+    if @location.save
         render :json => {
                    :status => :ok,
                    :message => "Success!",
                }.to_json
-      else
+    else
         render :json => {
                    :status => :fail,
                    :message => "Fails",
                }.to_json
-      end
     end
-
   end
   private
 end
