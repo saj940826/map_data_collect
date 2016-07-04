@@ -11,7 +11,10 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160703213828) do
+ActiveRecord::Schema.define(version: 20160704133718) do
+
+  # These are extensions that must be enabled in order to support this database
+  enable_extension "plpgsql"
 
   create_table "information", force: :cascade do |t|
     t.string   "timestamp"
@@ -23,8 +26,15 @@ ActiveRecord::Schema.define(version: 20160703213828) do
     t.datetime "updated_at", null: false
   end
 
-# Could not dump table "location_data" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "location_data", force: :cascade do |t|
+    t.string   "timestamp"
+    t.time     "local_time"
+    t.float    "longitude"
+    t.float    "latitude"
+    t.float    "bearing"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "location_datas", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -34,6 +44,13 @@ ActiveRecord::Schema.define(version: 20160703213828) do
     t.float    "longitude"
     t.float    "latitude"
     t.float    "bearing"
+  end
+
+  create_table "users", force: :cascade do |t|
+    t.string   "username"
+    t.text     "describe"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
 end
